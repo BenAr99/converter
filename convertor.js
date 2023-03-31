@@ -6,13 +6,6 @@ function handleAuthClick(event) {
     if (event.target.id === 'log-in') {
         showAuthorizationModal()
     }
-    if (event.target.id === 'sign-in') {
-        showSignInModal();
-    }
-}
-
-function showSignInModal() {
-    console.log('in progress')
 }
 
 function showAuthorizationModal() {
@@ -41,14 +34,14 @@ function showAuthorizationModal() {
             document.querySelector('.limitation-interface').remove();
         }
     }
+
     document.querySelector('.close-modal').onclick = closeModal;
 }
 
 document.querySelector('.authorization').onclick = handleAuthClick;
 
 
-// textContent это value в html и наоборот? Прочитать крч
-function swapPlacesValue () {
+function swapPlacesValue() {
     let firstValueInput = document.getElementById('output_value_first').value;
     let secondValueInput = document.getElementById('output_value_second').value;
     document.getElementById('output_value_first').value = secondValueInput
@@ -57,39 +50,37 @@ function swapPlacesValue () {
 
 document.querySelector('.swap-places_img').onclick = swapPlacesValue
 
-//http://localhost:8080/api/converter
-async function postCurrency(body, idBaseCurrency, idConversionCurrency) {
 
+async function postCurrency(body, idBaseCurrency, idConversionCurrency) {
     let response = await fetch(`http://localhost:8080/api/converter?idBaseCurrency=${idBaseCurrency}&idConversionCurrency=${idConversionCurrency}`, {
-        method: 'POST',
-        mode: "cors",
-        headers: {
+        method: 'POST', mode: "cors", headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
+        }, body: JSON.stringify(body)
     });
     let result = await response.json();
     if (response.ok) {
         return result
+    } else {
+        console.error('Не удалось загрузить валюты');
+        return [];
     }
 }
 
 const options = {
-    method: 'GET',
-    mode: 'cors'
+    method: 'GET', mode: 'cors'
 }
 
 
-async function getCurrency(){
+async function getCurrency() {
     const response = await fetch('http://localhost:8080/api/', options);
     const data = await response.json()
     if (response.ok) {
         return data
 
     } else {
-        alert('wa')
+        console.error('Не удалось загрузить валюты');
+        return [];
     }
-
 }
 
 function idPostRequestFirst(body, idBaseCurrency, idConversionCurrency) {
@@ -105,7 +96,7 @@ function idPostRequestFirst(body, idBaseCurrency, idConversionCurrency) {
         }
         postCurrency(body, idBaseCurrency, idConversionCurrency).then(data => {
             console.log(data)
-                document.getElementById('output_value_second').value = data.exchangeResultAmount
+            document.getElementById('output_value_second').value = data.exchangeResultAmount
         })
     })
 }
@@ -123,23 +114,23 @@ function idPostRequestSecond(body, idBaseCurrency, idConversionCurrency) {
         }
         postCurrency(body, idBaseCurrency, idConversionCurrency).then(data => {
             console.log(data)
-                document.getElementById('output_value_first').value = data.exchangeResultAmount
+            document.getElementById('output_value_first').value = data.exchangeResultAmount
         })
     })
 }
 
 
 function doConverisonOutputFirst(event) {
-        const inputValue = document.getElementById('output_value_first').value;
-        const idBaseCurrency = document.getElementById('currency-selection-first').value.slice(0, 3)
-        const idConversionCurrency = document.getElementById('currency-selection-second').value.slice(0, 3)
-        const dataBoxInput = {
-            amount: inputValue,
-        }
-        idPostRequestFirst(dataBoxInput, idBaseCurrency, idConversionCurrency)
+    const inputValue = document.getElementById('output_value_first').value;
+    const idBaseCurrency = document.getElementById('currency-selection-first').value.slice(0, 3)
+    const idConversionCurrency = document.getElementById('currency-selection-second').value.slice(0, 3)
+    const dataBoxInput = {
+        amount: inputValue,
+    }
+    idPostRequestFirst(dataBoxInput, idBaseCurrency, idConversionCurrency)
 }
 
-function doConversionOutputSecond () {
+function doConversionOutputSecond() {
     const inputValue = document.getElementById('output_value_second').value;
     const idBaseCurrency = document.getElementById('currency-selection-second').value.slice(0, 3)
     const idConversionCurrency = document.getElementById('currency-selection-first').value.slice(0, 3)
@@ -151,8 +142,7 @@ function doConversionOutputSecond () {
 
 // бд
 
-// в чем разница onselect && onchange
-function сurrencyСonversion (event) {
+function сurrencyСonversion() {
     let firstInputConversion = document.getElementById('output_value_first')
     let secondInputConversion = document.getElementById('output_value_second')
 
@@ -165,11 +155,10 @@ function сurrencyСonversion (event) {
     firstSelectConversion.oninput = doConverisonOutputFirst
     secondSelectConversion.oninput = doConversionOutputSecond
 }
+
 сurrencyСonversion()
 
 getCurrency().then(data => {
-    console.log(data)
-
     // введение данных
     function createTableCurrency() {
         const currencyInputData = document.querySelector('tbody');
@@ -182,83 +171,36 @@ getCurrency().then(data => {
 
     createTableCurrency()
 
-    function searchTable (event) {
-        let poiskText = '';
-        if (event.target.id === 'code-search' ) {
-            poiskText = document.getElementById('code-search').value;
+    function searchTable(event) {
+        let searchText = '';
+        if (event.target.id === 'code-search') {
+            searchText = document.getElementById('code-search').value;
         }
-        if (event.target.id === 'currency-search' ) {
-            poiskText = document.getElementById('currency-search').value;
+        if (event.target.id === 'currency-search') {
+            searchText = document.getElementById('currency-search').value;
         }
         document.querySelectorAll('tbody tr').forEach(item => {
-            if (item.textContent.includes(poiskText) === false) {
+            if (item.textContent.includes(searchText) === false) {
                 item.style.display = 'none'
             }
-            if (item.textContent.includes(poiskText) === true) {
+            else  {
                 item.style.display = 'table-row'
             }
         })
     }
+
     document.getElementById('code-search').onkeyup = searchTable // focus?
     document.getElementById('currency-search').onkeyup = searchTable
 
     // Выбор валюты в вкладыше
     function currencySelection() {
-        document.querySelectorAll('.currency-selection').forEach( item => {
+        document.querySelectorAll('.currency-selection').forEach(item => {
             for (let i = 0; data.currencies.length > i; i++) {
-                item.innerHTML +=  `<option>${data.currencies[i].charCode} - ${data.currencies[i].name}</option>`
+                item.innerHTML += `<option>${data.currencies[i].charCode} - ${data.currencies[i].name}</option>`
             }
         })
     }
-    currencySelection()
 
-//     function perevodStabliciVoption (event) {
-//         let test = document.querySelector('.currency-selection')
-//
-//             test.value = 'AZN - Азербайджанский манат'
-//
-//     }
-//     document.querySelector('tbody tr').onclick = perevodStabliciVoption
+    currencySelection()
 })
 
-// function FET (e) {
-//     console.log(document.activeElement.id)
-// }
-//
-// document.querySelector('body').onclick = FET
-
-// КАК БЫЛ ПОИСК И КАК СТАЛ? ЧУСТВУЕШЬ ДА ? ПОЭТОМУ МR СРАЗУ НЕ БЫЛ
-// СОКРАЩЕНИЕ КОДА В ЦЕЛЫХ ДВА РАЗА (1,72) БЫЛО (31) СТАЛО (18)
-// поиск по таблице
-// function search(e) {
-//     let searchTableValue = '';
-//     let searchVariable = '';
-//
-//     for (let id = 0; data.currencies.length - 1 > id; id++) {
-//         if (e.target.id === 'code-search') {
-//             console.log('code')
-//             searchVariable = data.currencies[id].charCode
-//             searchTableValue = document.getElementById('code-search').value;
-//         } else if (e.target.id === 'currency-search') {
-//             console.log('currency')
-//             searchVariable = data.currencies[id].name
-//             searchTableValue = document.getElementById('currency-search').value;
-//         }
-//
-//         if (searchTableValue === searchVariable) { // стоит ли тут использовать case switch?
-//             let trueSearch = id;
-//             for (let id = 0; data.currencies.length - 1 > id; id++) {
-//                 if (trueSearch !== id) {
-//                     document.getElementById(`${id}`).style.display = 'none'
-//                 }
-//             }
-//         }
-//     }
-//     if (searchTableValue === '') {
-//         for (let id = 0; data.currencies.length - 1 > id; id++) {
-//             document.getElementById(`${id}`).style.display = 'table-row'
-//         }
-//     }
-// }
-// document.getElementById('code-search').onkeyup = search // focus?
-// document.getElementById('currency-search').onkeyup = search
