@@ -79,82 +79,53 @@ async function getCurrency() {
     }
 }
 
-function idPostRequestFrom(body, idBaseCurrency, idConversionCurrency) {
-    getCurrency().then(data => {
-        for (let i = 0; i < data.currencies.length; i++) {
-            if (data.currencies[i].charCode.includes(idBaseCurrency)) {
-                idBaseCurrency = data.currencies[i].id
+function idPostRequest(currencies, body, idBaseCurrency, idConversionCurrency, id) {
+        for (let i = 0; i < currencies.currencies.length; i++) {
+            if (currencies.currencies[i].charCode.includes(idBaseCurrency)) {
+                idBaseCurrency = currencies.currencies[i].id
             }
 
-            if (data.currencies[i].charCode.includes(idConversionCurrency)) {
-                idConversionCurrency = data.currencies[i].id
-            }
-        }
-        postCurrency(body, idBaseCurrency, idConversionCurrency).then(data => {
-            console.log(data)
-            document.getElementById('output_value_from').value = data.exchangeResultAmount
-        })
-    })
-}
-
-function idPostRequestIn(body, idBaseCurrency, idConversionCurrency) {
-    getCurrency().then(data => {
-        for (let i = 0; i < data.currencies.length; i++) {
-            if (data.currencies[i].charCode.includes(idBaseCurrency)) {
-                idBaseCurrency = data.currencies[i].id
-            }
-
-            if (data.currencies[i].charCode.includes(idConversionCurrency)) {
-                idConversionCurrency = data.currencies[i].id
+            if (currencies.currencies[i].charCode.includes(idConversionCurrency)) {
+                idConversionCurrency = currencies.currencies[i].id
             }
         }
         postCurrency(body, idBaseCurrency, idConversionCurrency).then(data => {
-            console.log(data)
-            document.getElementById('output_value_in').value = data.exchangeResultAmount
+            document.getElementById(id).value = data.exchangeResultAmount
         })
-    })
 }
 
-
-function doConverisonOutputfrom() {
-    const inputValue = document.getElementById('output_value_in').value;
-    const idBaseCurrency = document.getElementById('currency-selection-in').value.slice(0, 3)
-    const idConversionCurrency = document.getElementById('currency-selection-from').value.slice(0, 3)
-    const dataBoxInput = {
-        amount: inputValue,
+function doConverisonOutput(currencies, inputId, selectionId, targetSelectionId, id) {
+    return function (){
+        const inputValue = document.getElementById(inputId).value;
+        const idBaseCurrency = document.getElementById(selectionId).value.slice(0, 3)
+        const idConversionCurrency = document.getElementById(targetSelectionId).value.slice(0, 3)
+        const dataBoxInput = {
+            amount: inputValue,
+        }
+        idPostRequest(currencies, dataBoxInput, idBaseCurrency, idConversionCurrency, id)
     }
-    idPostRequestFrom(dataBoxInput, idBaseCurrency, idConversionCurrency)
-}
-
-function doConversionOutputfrom() {
-    const inputValue = document.getElementById('output_value_from').value;
-    const idBaseCurrency = document.getElementById('currency-selection-from').value.slice(0, 3)
-    const idConversionCurrency = document.getElementById('currency-selection-in').value.slice(0, 3)
-    const dataBoxInput = {
-        amount: inputValue,
-    }
-    idPostRequestIn(dataBoxInput, idBaseCurrency, idConversionCurrency)
 }
 
 // бд
 
-function сurrencyСonversion() {
+function сurrencyСonversion(currencies) {
     let fromInputConversion = document.getElementById('output_value_in')
     let inInputConversion = document.getElementById('output_value_from')
 
 
     let fromSelectConversion = document.getElementById('currency-selection-in')
     let inSelectConversion = document.getElementById('currency-selection-from')
-    fromInputConversion.oninput = doConverisonOutputfrom
-    inInputConversion.oninput = doConversionOutputfrom
+    fromInputConversion.oninput = doConverisonOutput(currencies,'output_value_in', 'currency-selection-in', 'currency-selection-from', 'output_value_from')
+    inInputConversion.oninput = doConverisonOutput(currencies,'output_value_from', 'currency-selection-from', 'currency-selection-in', "output_value_in")
 
-    fromSelectConversion.oninput = doConverisonOutputfrom
-    inSelectConversion.oninput = doConversionOutputfrom
+    fromSelectConversion.oninput = doConverisonOutput(currencies,'output_value_in', 'currency-selection-in', 'currency-selection-from', 'output_value_from')
+    inSelectConversion.oninput = doConverisonOutput(currencies,'output_value_from', 'currency-selection-from', 'currency-selection-in', "output_value_in")
 }
 
-сurrencyСonversion()
+
 
 getCurrency().then(data => {
+    сurrencyСonversion(data)
     // введение данных
     function createTableCurrency() {
         const currencyInputData = document.querySelector('tbody');
