@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Конвентатор</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="heading-container">
+            <div class="heading">
+                <img class="logo" src="assets/image/convertor.svg">
+                <div class="authorization">
+                    <button class="authorization-button" id="sign-in">Sign In</button>
+                    <button class="authorization-button" id="log-in">Log In</button>
+                </div>
+            </div>
+    </header>
+
+    <main class="convertor-container">
+        <section class="currency-conversion-container">
+            <div class="currency-conversion">
+                <div class="calc_side_container">
+                    <select class="currency-selection" id="currency-selection-from"></select>
+                    <div class="currency_button_box">
+                    </div>
+                    <div class="calc_input_box">
+                        <input class="output_value" id="output_value_from" type="text">
+
+                    </div>
+                </div>
+                <div>
+                    <img class="swap-places_img" src="assets/icons/arrow-2.svg" alt="">
+                </div>
+
+                <div class="calc_side_container">
+                    <div class="currency_button_box">
+                        <select class="currency-selection" id="currency-selection-in"></select>
+                    </div>
+                    <div class="calc_input_box">
+                        <input class="output_value" id="output_value_in" type="text">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="сurrency-table-container">
+            <div class="currency-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                Код
+                            </th>
+                            <th>
+                                Валюта
+                            </th>
+                            <th>
+                                Курс по отношению к рублю
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <input id="code-search" placeholder="Поиск" type="text" value="">
+                            </td>
+                            <td>
+                                <input id="currency-search" placeholder="Поиск" type="text">
+                            </td>
+
+                            <td></td>
+                        </tr>
+                    </thead>
+
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script src="convertor.js"></script>
+</body>
+</html>

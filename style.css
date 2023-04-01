@@ -1,0 +1,295 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 20px;
+    /* нужно ли? */
+}
+
+header {
+    background: radial-gradient(circle, rgba(192,210,245,1) 16%, rgba(182,202,241,1) 54%, rgba(217,229,252,1) 81%);
+}
+
+.heading {
+    position: relative;
+    box-shadow: 0 0px 5px #00000075;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    z-index: 1;
+}
+
+.logo {
+    width: 100px;
+    height: 50px;
+}
+
+.authorization {
+    display: flex;
+    justify-content: space-between;
+    width: 175px;
+}
+
+.authorization-button {
+    background-color: transparent;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px;
+    border: 3px solid transparent;
+}
+
+.authorization-button:hover {
+    background: #eaf0fc;
+    transition: 0.5s;
+    border: 3px solid #c9d8f6;
+    border-radius: 10px;
+}
+
+.authorization-modal-container{
+    z-index: 30;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 50%;
+    bottom: 50%;
+    left: 0;
+    right: 0;
+    background: #FFFFFF;
+    width: 400px;
+    height: 410px;
+    border: 3px solid transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 10px;
+}
+
+.limitation-interface {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: gray;
+    z-index: 20;
+    opacity: 0.5;
+}
+
+.authorization-modal {
+    padding: 25px;
+}
+
+.logo-authorization {
+    position: relative;
+    top: -6px;
+    left: 110px;
+    width: 125px;
+    margin-bottom: 15px;
+}
+
+.input-authorization {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+.input-authorization span {
+    user-select: none;
+    margin: 0 0 5px 2px;
+}
+
+.input-authorization input {
+    margin-bottom: 15px;
+}
+
+.input-authorization input {
+    padding: 8px 10px;
+    border: 1px solid #babfc4;
+    border-radius: 3px;
+}
+
+.close-modal {
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+    position: relative;
+    top: -22px;
+    left: 351px;
+    width: 17px;
+    height: 21px;
+    user-select: none;
+}
+
+.close-modal:hover {
+    border-radius: 3px;
+    -webkit-filter: brightness(125%);
+    background: #ff4d4d;
+}
+
+.modal-authorization-button {
+    background: linear-gradient(90deg, rgba(234,238,243,1) 15%, rgba(224,238,252,1) 35%, rgba(234,238,243,1) 65%, rgba(224,238,252,1) 100%);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 0px 0 9px 0;
+    border: 1px solid #babfc4;
+    border-radius: 5px;
+    width: 350px;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.modal-authorization-logIn-button {
+    margin-bottom: 20px;
+}
+
+.modal-authorization-button:hover {
+    -webkit-filter: brightness(90%)
+}
+
+.modal-authorization-button img{
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+}
+
+.google-logo {
+    background: #FFFFFF;
+}
+
+.github-logo {
+    background: black;
+    color: white;
+}
+
+.facebook-logo {
+    background: #385499;
+    color: white;
+}
+
+.convertor-container {
+    background: #f4f5f7;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.currency-conversion-container {
+    background: #FFFFFF;
+    margin: 50px 50px;
+    padding:10px;
+    border-radius:15px;
+}
+
+.currency-conversion {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 75px 75px;
+}
+
+.button-selector-window {
+    border: 1px solid gray;
+    overflow: auto;
+    padding-left: 10px;
+    width: 250px;
+    height: 100px;
+}
+
+.button-selector-search {
+    width: 245px;
+    padding: 8px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    outline: 0;
+}
+
+.currency-with-value {
+    display: flex;
+    flex-direction: column;
+}
+
+.calc_side_container {
+    width: 400px;
+}
+
+.currency_data {
+    padding: 8px 5px;
+    width: 100px;
+    background: #5590ba;
+    border-radius: 4px 0 0 4px;
+    color: white;
+    border: 0;
+}
+
+.currency-selection {
+    padding: 5px;
+    border: 2px solid gray;
+}
+
+.currency_data:hover {
+    -webkit-filter: brightness(110%);
+}
+
+.calc_input_box {
+    margin-top: 20px;
+    border: 1px solid #cdcdcd;
+    padding: 30px 20px 15px;
+}
+
+.swap-places_img {
+    margin: 0 10px 25px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.swap-places_img:hover{
+    opacity: 0.7;
+ }
+
+.output_value {
+    width: 100%;
+    font-size: 44px;
+    border: 0;
+    outline: 0;
+}
+
+.сurrency-table-container {
+    background: #FFFFFF;
+    margin: 50px 50px;
+    padding: 10px;
+}
+
+.currency-table {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding: 75px 75px;
+}
+
+table {
+    border-collapse: collapse;
+    text-align: left;
+}
+
+tbody td, thead td, thead th{
+    padding: 8px;
+    border: 2px solid #7d95a6;
+}
+
+tbody{
+    cursor: pointer;
+}
+
+thead input {
+    padding: 8px;
+    outline: 0;
+    border: 1px solid grey;
+    border-radius: 3px;
+}
+
+thead th{
+    background-color: #f4f5f7;
+}
+
