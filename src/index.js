@@ -1,3 +1,8 @@
+import {eblan} from './test'
+console.log(eblan)
+import './styles/style.css'
+
+
 function handleAuthClick(event) {
     if (event.target.id === 'log-in') {
         showAuthorizationModal()
