@@ -1,4 +1,4 @@
-import {postCurrency} from "./index";
+import {postCurrency} from "./request";
 
 export function handleAuthClick(event) {
     if (event.target.id === 'log-in') {
@@ -14,14 +14,14 @@ export function showAuthorizationModal() {
     const authorizationModal = document.createElement('section');
     authorizationModal.innerHTML = `<div class="authorization-modal">
         <div class="close-modal">&#x2715</div>
-        <img class="logo-authorization" src="assets/image/convertor.svg">
+        <img alt="Converter" class="logo-authorization" src="assets/image/convertor.svg">
         <div class="input-authorization">
         <span>Email</span> <input type="text">
         <span>Password</span> <input type="password"></div>
         <button class="modal-authorization-button modal-authorization-logIn-button">Log In</button>
-        <button class="modal-authorization-button google-logo"><img alt="" src="assets/icons/google-logo.svg">Log in with Google </button>
-        <button class="modal-authorization-button github-logo"><img alt="" src="assets/icons/github_logo_icon_147285.svg">Log in with GitHub </button>
-        <button class="modal-authorization-button facebook-logo"><img alt="" src="assets/icons/facebook-logo.svg">Log in with Facebook </button>
+        <button class="modal-authorization-button google-logo"><img alt="Google" src="assets/icons/google-logo.svg">Log in with Google </button>
+        <button class="modal-authorization-button github-logo"><img alt="Github" src="assets/icons/github_logo_icon_147285.svg">Log in with GitHub </button>
+        <button class="modal-authorization-button facebook-logo"><img alt="Facebook" src="assets/icons/facebook-logo.svg">Log in with Facebook </button>
         </div>`
     authorizationModal.className = 'authorization-modal-container';
     document.querySelector('body').prepend(authorizationModal);
