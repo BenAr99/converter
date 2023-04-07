@@ -1,4 +1,5 @@
 import {postCurrency} from "./request";
+import {test} from "./index";
 
 export function handleAuthClick(event) {
     if (event.target.id === 'log-in') {
@@ -6,11 +7,15 @@ export function handleAuthClick(event) {
     }
 }
 
-export function showAuthorizationModal() {
+export function closeModal() {
+    document.querySelector('.authorization-modal-container').remove();
+    document.querySelector('.limitation-interface').remove();
+}
+
+export function showAuthorizationModal(e) {
     const limitationInterface = document.createElement('div');
     limitationInterface.className = 'limitation-interface';
     document.querySelector('body').append(limitationInterface);
-
     const authorizationModal = document.createElement('section');
     authorizationModal.innerHTML = `<div class="authorization-modal">
         <div class="close-modal">&#x2715</div>
@@ -25,16 +30,10 @@ export function showAuthorizationModal() {
         </div>`
     authorizationModal.className = 'authorization-modal-container';
     document.querySelector('body').prepend(authorizationModal);
+    test()
 }
 
-export function closeModal(e) {
-    console.log('1v')
-    if (e.target.className === 'close-modal') {
-        console.log('2v')
-        document.querySelector('.authorization-modal-container').remove();
-        document.querySelector('.limitation-interface').remove();
-    }
-}
+
 
 export function swapPlacesValue() {
     let firstValueInput = document.getElementById('output_value_from').value;
@@ -102,7 +101,7 @@ export function сurrencyСonversion(currencies) {
     inSelectConversion.oninput = doConverisonOutput(currencies,'output_value_from', 'currency-selection-from', 'currency-selection-in', "output_value_in")
 }
 
-export function createTableCurrency(data) {debugger
+export function createTableCurrency(data) {
     const currencyInputData = document.querySelector('tbody');
     for (let i = 0; data.currencies.length - 1 > i; i++) {
         currencyInputData.innerHTML += `<tr id="${i}"><td>${data.currencies[i].charCode}</td>

@@ -1,12 +1,13 @@
 import './styles/style.css';
 import {getCurrency} from "./request";
-import {handleAuthClick, showAuthorizationModal/*под вопросом*/, closeModal,
-    swapPlacesValue, searchTable, сurrencyСonversion, createTableCurrency} from './handler';
+import {handleAuthClick,
+    swapPlacesValue, searchTable, showAuthorizationModal/*под вопросом*/, closeModal
+    ,сurrencyСonversion, createTableCurrency} from './handler';
 
+export function test () {
+        document.querySelector('.close-modal').onclick = closeModal;// ошибка
+}
 document.querySelector('.authorization').onclick = handleAuthClick;
-
-// document.querySelector('.close-modal').onclick = closeModal;// ошибка
-
 document.querySelector('.swap-places_img').onclick = swapPlacesValue;
 
 // бд
