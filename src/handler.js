@@ -60,7 +60,7 @@ export function searchTable(event) {
     })
 }
 
-function idPostRequest(currencies, body, idBaseCurrency, idConversionCurrency, id) {
+function idPostRequest(currencies, body, idBaseCurrency, idConversionCurrency, id,) {
     for (let i = 0; i < currencies.currencies.length; i++) {
         if (currencies.currencies[i].charCode.includes(idBaseCurrency)) {
             idBaseCurrency = currencies.currencies[i].id
@@ -71,7 +71,12 @@ function idPostRequest(currencies, body, idBaseCurrency, idConversionCurrency, i
         }
     }
     postCurrency(body, idBaseCurrency, idConversionCurrency).then(data => {
+        console.log(data)
+        console.log(document.getElementById(id));
         document.getElementById(id).value = data.exchangeResultAmount
+        if ( document.getElementById(id).value === 'undefined') {
+            document.getElementById(id).value = ""
+        }
     })
 }
 
