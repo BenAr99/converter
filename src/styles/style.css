@@ -292,3 +292,6 @@ thead th{
     background-color: #f4f5f7;
 }
 
+table {
+    width: 900px;
+}

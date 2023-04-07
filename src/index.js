@@ -4,7 +4,7 @@ import {handleAuthClick,
     swapPlacesValue, searchTable, showAuthorizationModal/*под вопросом*/, closeModal
     ,сurrencyСonversion, createTableCurrency} from './handler';
 
-export function test () {
+export function closeModalF () {
         document.querySelector('.close-modal').onclick = closeModal;// ошибка
 }
 document.querySelector('.authorization').onclick = handleAuthClick;
@@ -17,7 +17,6 @@ getCurrency().then(data => {
     // введение данных
     createTableCurrency(data);
     document.getElementById('code-search').onkeyup = searchTable;
-    document.getElementById('currency-search').onkeyup = searchTable;
 
     // Cоздание валюты в вкладыше
     document.querySelectorAll('.currency-selection').forEach(item => {

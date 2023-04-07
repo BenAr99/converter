@@ -1,5 +1,5 @@
 import {postCurrency} from "./request";
-import {test} from "./index";
+import {closeModalF} from "./index";
 
 export function handleAuthClick(event) {
     if (event.target.id === 'log-in') {
@@ -30,7 +30,7 @@ export function showAuthorizationModal(e) {
         </div>`
     authorizationModal.className = 'authorization-modal-container';
     document.querySelector('body').prepend(authorizationModal);
-    test()
+    closeModalF()
 }
 
 
@@ -47,11 +47,9 @@ export function searchTable(event) {
     if (event.target.id === 'code-search') {
         searchText = document.getElementById('code-search').value;
     }
-    if (event.target.id === 'currency-search') {
-        searchText = document.getElementById('currency-search').value;
-    }
+
     document.querySelectorAll('tbody tr').forEach(item => {
-        if (item.textContent.includes(searchText) === false) {
+        if (item.textContent.toUpperCase().includes(searchText.toUpperCase()) === false) {
             item.style.display = 'none'
         }
         else  {
