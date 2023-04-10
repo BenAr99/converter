@@ -2,12 +2,11 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Конвентатор</title>
-    <link rel="stylesheet" href="style.css">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
-
     <header class="heading-container">
             <div class="heading">
                 <img class="logo" src="assets/image/convertor.svg">
@@ -66,10 +65,7 @@
                             <td>
                                 <input id="code-search" placeholder="Поиск" type="text" value="">
                             </td>
-                            <td>
-                                <input id="currency-search" placeholder="Поиск" type="text">
-                            </td>
-
+                            <td></td>
                             <td></td>
                         </tr>
                     </thead>
@@ -79,6 +75,5 @@
             </div>
         </section>
     </main>
-    <script src="convertor.js"></script>
 </body>
 </html>
